@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamondview Estates – Community Feedback Initiative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1B2B4B;
+      --teal:   #2A7F7F;
+      --sand:   #F4F0E8;
+      --rust:   #C85A2A;
+      --text:   #1B2B4B;
+      --muted:  #5A6B82;
+      --border: #D8DDE8;
+      --white:  #ffffff;
+      --r:      10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+    h1, h2, h3 { font-family: 'Fraunces', serif; line-height: 1.2; color: var(--navy); }
+    h2 { font-size: 1.55rem; margin-bottom: 14px; }
+
+    p { color: var(--muted); margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Nav */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: sticky; top: 0;
+      background: var(--white);
+      z-index: 50;
+    }
+    .brand-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--navy); display: block; }
+    .brand-sub  { font-size: 0.72rem; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: var(--r);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.18s;
+    }
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-primary:hover { background: #236969; transform: translateY(-1px); }
+    .btn-sm { padding: 9px 18px; font-size: 0.82rem; }
+
+    /* Hero */
+    .hero {
+      background: var(--navy);
+      padding: 64px 20px 60px;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(42,127,127,0.25);
+      border: 1px solid rgba(42,127,127,0.45);
+      color: #6ECFCF;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(1.7rem, 5vw, 2.5rem);
+      color: #fff;
+      max-width: 560px;
+      margin: 0 auto 16px;
+    }
+    .hero h1 em { font-style: italic; color: #6ECFCF; }
+    .hero p { color: rgba(255,255,255,0.65); font-size: 1rem; max-width: 480px; margin: 0 auto 32px; }
+
+    /* Sections */
+    .section { padding: 60px 0; }
+    .section-sand { background: var(--sand); }
+    .divider { width: 40px; height: 3px; background: var(--teal); border-radius: 2px; margin-bottom: 20px; }
+
+    /* Alert */
+    .alert {
+      background: #FFF8F0;
+      border-left: 4px solid var(--rust);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+      color: #5A3020;
+    }
+    .alert strong { font-weight: 600; }
+
+    /* Concern list */
+    .concern-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+    .concern-list li {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: 13px 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .concern-list li::before {
+      content: '';
+      width: 8px; height: 8px; min-width: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    /* Documents */
+    .doc-list { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+    .doc-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      background: var(--white);
+    }
+    .doc-card:hover { border-color: var(--teal); box-shadow: 0 3px 12px rgba(42,127,127,0.1); }
+    .doc-icon {
+      width: 36px; height: 36px; min-width: 36px;
+      border-radius: 8px;
+      background: #EBF5F5;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .doc-icon svg { width: 16px; height: 16px; color: var(--teal); }
+    .doc-title { font-size: 0.88rem; font-weight: 600; color: var(--navy); line-height: 1.3; }
+    .doc-meta  { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+    .doc-arrow { margin-left: auto; color: var(--muted); }
+    .doc-arrow svg { width: 14px; height: 14px; }
+
+    /* Form */
+    form { display: flex; flex-direction: column; gap: 20px; }
+
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    label { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .opt { font-weight: 400; color: var(--muted); font-size: 0.8rem; }
+
+    input[type="text"], input[type="email"], input[type="tel"], textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(42,127,127,0.1); }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .radios, .checks { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .radio-row, .check-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.95rem; cursor: pointer;
+    }
+    .radio-row input, .check-row input {
+      width: 17px; height: 17px; min-width: 17px;
+      accent-color: var(--teal); cursor: pointer;
+      padding: 0; border: none;
+    }
+
+    .consent {
+      background: #F0F7F7;
+      border: 1.5px solid #B3D9D9;
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .consent input { width: 17px; height: 17px; min-width: 17px; margin-top: 2px; accent-color: var(--teal); }
+    .consent label { font-weight: 400; font-size: 0.88rem; color: var(--muted); cursor: pointer; }
+
+    .submit-wrap { text-align: center; }
+    .submit-wrap .btn { min-width: 200px; font-size: 0.95rem; padding: 14px 32px; }
+    .submit-note { font-size: 0.78rem; color: var(--muted); margin-top: 10px; }
+
+    /* Success */
+    #success { display: none; text-align: center; padding: 40px 0; }
+    .check-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #DCFCE7; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 16px;
+    }
+    .check-circle svg { width: 26px; height: 26px; color: #16A34A; }
+    #success h3 { font-size: 1.3rem; margin-bottom: 8px; }
+
+    /* Footer */
+    footer {
+      background: #111D33;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin: 0; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="#" style="text-decoration:none;">
+    <span class="brand-name">Diamondview Estates</span>
+    <span class="brand-sub">Community Feedback Initiative</span>
+  </a>
+  <a href="#form" class="btn btn-primary btn-sm">Share Feedback</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag">Carp, Ontario · Community Feedback Initiative</div>
+    <h1>Do You Support the Proposed <em>Sidewalk</em> in Diamondview Estates?</h1>
+    <p>Residents of Diamondview Estates in Carp are asked to weigh in on a planned sidewalk installation that may affect driveway space, parking, and winter safety.</p>
+    <a href="#form" class="btn btn-primary">Submit Your Feedback</a>
+  </div>
+</section>
+
+<!-- Why It Matters -->
+<section class="section">
+  <div class="wrap">
+    <div class="divider"></div>
+    <h2>Why This Matters</h2>
+    <div class="alert">
+      <strong>Many residents of Diamondview Estates were not clearly informed</strong> that a sidewalk was part of the development plan when they purchased their homes. The proposed sidewalk may reduce usable driveway depth and affect day-to-day property access.
+    </div>
+    <p>For some homes the sidewalk could shorten the driveway by several feet — raising real questions about winter parking, snow clearing responsibility, and roof-slide hazards on narrowed driveways.</p>
+    <p>This initiative collects resident voices so a clear, organized response can be brought to the City of Ottawa.</p>
+  </div>
+</section>
+
+<!-- Key Concerns -->
+<section class="section section-sand">
+  <div class="wrap">
+    <div class="divider"></div>
+    <h2>Key Concerns Raised by Residents</h2>
+    <ul class="concern-list">
+      <li>Loss of driveway space and reduced vehicle access</li>
+      <li>Winter parking, snow clearing responsibility, and roof-slide hazards</li>
+      <li>Lack of clear communication or disclosure from the City</li>
+      <li>Homeowners purchased without being told this change was planned</li>
+      <li>General property safety and access concerns</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Development Documents -->
+<section class="section" id="documents">
+  <div class="wrap">
+    <div class="divider"></div>
+    <h2>Development Background</h2>
+    <p>The sidewalk is part of the City of Ottawa's approved subdivision plan for Diamondview Estates (File D07-16-22-0017). The utility and infrastructure layout was outlined in official composite plans submitted in 2024. Residents have raised questions about whether this was adequately disclosed during the home-buying process.</p>
+
+    <div class="doc-list">
+      <a href="https://webcast.ottawa.ca/plan/All_Image%20Referencing_Subdivision_Image%20Reference_2024-07-26%20-%20Composite%20Utility%20Plan%201%20%26%202%20-%20D07-16-22-0017.PDF" target="_blank" rel="noopener" class="doc-card">
+        <div class="doc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <div class="doc-title">Composite Utility Plan 1 &amp; 2 — D07-16-22-0017</div>
+          <div class="doc-meta">City of Ottawa · Subdivision Reference · July 2024</div>
+        </div>
+        <div class="doc-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+
+      <a href="https://mvc.on.ca/wp-content/uploads/2023/10/2023-10-11-Board-of-Directors-Agenda-Package-Oct-16-2023-Meeting-V4.pdf" target="_blank" rel="noopener" class="doc-card">
+        <div class="doc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div>
+          <div class="doc-title">Mississippi Valley Conservation — Board of Directors Agenda</div>
+          <div class="doc-meta">MVC · October 16, 2023 Meeting Package</div>
+        </div>
+        <div class="doc-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Feedback Form -->
+<section class="section section-sand" id="form">
+  <div class="wrap">
+    <div class="divider"></div>
+    <h2>Resident Feedback Form</h2>
+    <p style="margin-bottom:28px;">Open to all residents of Diamondview Estates in Carp, Ontario. All submissions are confidential.</p>
+
+    <div id="form-wrap">
+      <form id="feedback-form" novalidate>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="field">
+            <label for="address">Street Address</label>
+            <input type="text" id="address" name="address" placeholder="123 Diamondview Drive" required />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone <span class="opt">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="(613) 000-0000" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Do you support the sidewalk being installed?</label>
+          <div class="radios">
+            <label class="radio-row"><input type="radio" name="support" value="yes" required /> Yes, I support it</label>
+            <label class="radio-row"><input type="radio" name="support" value="no" /> No, I do not support it</label>
+            <label class="radio-row"><input type="radio" name="support" value="unsure" /> Unsure — I need more information</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Main concerns <span class="opt">(select all that apply)</span></label>
+          <div class="checks">
+            <label class="check-row"><input type="checkbox" name="concerns" value="driveway" /> Loss of driveway space</label>
+            <label class="check-row"><input type="checkbox" name="concerns" value="snow" /> Winter snow and ice concerns</label>
+            <label class="check-row"><input type="checkbox" name="concerns" value="parking" /> Parking issues</label>
+            <label class="check-row"><input type="checkbox" name="concerns" value="notice" /> Lack of notice or disclosure at time of purchase</label>
+            <label class="check-row"><input type="checkbox" name="concerns" value="safety" /> Safety concerns</label>
+            <label class="check-row"><input type="checkbox" name="concerns" value="other" /> Other</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="comments">Additional Comments <span class="opt">(optional)</span></label>
+          <textarea id="comments" name="comments" placeholder="Anything else you'd like us to know..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Can we include you in future communications about this issue?</label>
+          <div class="radios">
+            <label class="radio-row"><input type="radio" name="future_contact" value="yes" required /> Yes, keep me informed</label>
+            <label class="radio-row"><input type="radio" name="future_contact" value="no" /> No, this submission is enough</label>
+          </div>
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="consent" name="consent" required />
+          <label for="consent">I agree that my information may be used only for this Community Feedback Initiative and will not be shared with outside parties.</label>
+        </div>
+
+        <div class="submit-wrap">
+          <button type="submit" class="btn btn-primary">Submit Feedback</button>
+          <p class="submit-note">Your response is confidential and used only to organize community input.</p>
+        </div>
+
+      </form>
+    </div>
+
+    <div id="success">
+      <div class="check-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Thank you for your feedback.</h3>
+      <p>Your response has been recorded. If you'd like to stay informed, we'll be in touch as this Community Feedback Initiative develops.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>Created by residents of Diamondview Estates in Carp, Ontario — Community Feedback Initiative.<br>All information collected is confidential and used solely to organize resident input regarding the proposed sidewalk installation.<br>This is not an official City of Ottawa communication.</p>
+</footer>
+
+<script>
+  document.getElementById('feedback-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const f = e.target;
+    const name    = f.querySelector('[name="name"]').value.trim();
+    const address = f.querySelector('[name="address"]').value.trim();
+    const email   = f.querySelector('[name="email"]').value.trim();
+    const support = f.querySelector('[name="support"]:checked');
+    const contact = f.querySelector('[name="future_contact"]:checked');
+    const consent = f.querySelector('[name="consent"]').checked;
+
+    let valid = true;
+    [['name', name], ['address', address], ['email', email]].forEach(([n, v]) => {
+      const el = f.querySelector(`[name="${n}"]`);
+      if (!v) {
+        el.style.borderColor = '#EF4444'; valid = false;
+        el.addEventListener('input', () => el.style.borderColor = '', { once: true });
+      }
+    });
+    if (!support || !contact || !consent) valid = false;
+    if (!valid) return;
+
+    const btn = f.querySelector('button[type="submit"]');
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+
+    const APPS_SCRIPT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+
+    const concerns = [...f.querySelectorAll('[name="concerns"]:checked')]
+      .map(el => el.value).join(', ');
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, address, email,
+        phone:          f.querySelector('[name="phone"]').value.trim(),
+        support:        support.value,
+        concerns,
+        comments:       f.querySelector('[name="comments"]').value.trim(),
+        future_contact: contact.value
+      })
+    })
+    .finally(() => {
+      document.getElementById('form-wrap').style.display = 'none';
+      const s = document.getElementById('success');
+      s.style.display = 'block';
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+</script>
+</body>
+</html>
